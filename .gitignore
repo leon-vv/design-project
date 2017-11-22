@@ -1,3 +1,5 @@
 *.cf
 *.swp
 build
+__pycache__
+.doit.db
