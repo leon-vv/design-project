@@ -1,5 +1,5 @@
 files = [
-    ["mux1-2to1", "mux4-to-1", "reg"] # Task 1
+    ["mux1-2to1", "mux4-2to1", "reg"] # Task 1
 ]
 
 def prefix_dir(name, suffix, task_num):
