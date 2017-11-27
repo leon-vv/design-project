@@ -1,28 +1,53 @@
+# Project structure
 files = [
-    ["mux1-2to1", "mux4-2to1", "reg"] # Task 1
+    {
+        # No dependencies beside mux1-2to1.vhd and test bench
+        "mux1-2to1": [],
+
+        # Depends on mux1-2to1 which is inside task 1
+        "mux4-2to1": [("mux1-2to1", 1)],
+        
+        "reg": []
+    }
 ]
 
 def prefix_dir(name, suffix, task_num):
     return "task" + str(task_num) + "/" + name + "/" + name + suffix
 
-def task_all():
-    i = 0
+def task_wave_files():
 
-    for directory in files:
-        i += 1
+    task_num = 0
 
-        actions = []
+    for task in files:
+        task_num += 1
 
-        for name in directory:
+        for name, deps in task.items():
             vhdl_name = name.replace("-", "_")
-            target = "build/task" + str(i) + "/" + name + ".vcd"
-            subactions = [
-                "ghdl_mcode -a " + prefix_dir(name, ".vhd", i),
-                "ghdl_mcode -a " + prefix_dir(name, "-tb.vhd", i),
-                "ghdl_mcode -r " + vhdl_name + "_tb --vcd=" + target + " --stop-time=3000ns "]
-            actions.extend(subactions)
+            base_file = prefix_dir(name, ".vhd", task_num)
+            test_bench = prefix_dir(name, "-tb.vhd", task_num)
 
-        yield {
-            'basename': "task" + str(i),
-            'actions': actions
-        }
+            target = "build/task" + str(task_num) + "/" + name + ".vcd"
+            dependencies = [prefix_dir(dep[0], ".vhd", dep[1]) for dep in deps] + [base_file, test_bench]
+
+            actions = [
+                "ghdl_mcode -a " + base_file,
+                "ghdl_mcode -a " + test_bench,
+                "ghdl_mcode -r " + vhdl_name + "_tb --vcd=" + target + " --stop-time=3000ns "]
+
+            yield {
+                "basename": vhdl_name,
+                "clean": True,
+                "targets": [target],
+                "file_dep": dependencies,
+                "setup": ["_build directory"],
+                "actions": actions,
+                "title": lambda t: "Creating " + t.targets[0]
+            }
+
+def task_build_directory():
+    return {
+        "basename": "_build directory",
+        "clean": True,
+        "targets": ["build", "build/task1"],
+        "actions": ["mkdir -p build/task1"]
+    }
