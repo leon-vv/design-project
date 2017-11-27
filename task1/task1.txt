@@ -1,0 +1,16 @@
+What we did:
+
+Jelle van Cappelle:
+Made general purpose register (which will be used for register_A and register_B) and its test bench.
+General purpose register was made using SR-flipflops, using the inputs of the register and some additional logic to control the flipflops, and by mapping the outputs of the flipflops to the output of the register.
+
+Léon van Velzen:
+Made MUX1_2to1 and MUX4_2to1 ...
+
+How to simulate:
+For files in task1/reg/: run the following commands:
+	ghdl -a reg.vhd
+	ghdl -a reg-tb.vhd
+	ghdl -r reg_tb --vcd=reg_test.vcd --stop-time=5000ns
+
+...
