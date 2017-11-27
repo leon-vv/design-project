@@ -1,5 +1,4 @@
 # Digital Techniques Design Project
--------------------------------------------------------
 
 ### Structure
 
