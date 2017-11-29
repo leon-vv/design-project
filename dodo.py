@@ -8,6 +8,9 @@ files = [
         "mux4-2to1": [("mux1-2to1", 1)],
         
         "reg": []
+    },
+    {
+        "alu": []        
     }
 ]
 
@@ -39,15 +42,20 @@ def task_wave_files():
                 "clean": True,
                 "targets": [target],
                 "file_dep": dependencies,
-                "setup": ["_build directory"],
+                "setup": ["_build_directory" + str(task_num)],
                 "actions": actions,
                 "title": lambda t: "Creating " + t.targets[0]
             }
 
 def task_build_directory():
-    return {
-        "basename": "_build directory",
-        "clean": True,
-        "targets": ["build", "build/task1"],
-        "actions": ["mkdir -p build/task1"]
-    }
+    task_num = 0
+
+    for task in files:
+        task_num += 1
+
+        yield {
+            "basename": "_build_directory" + str(task_num),
+            "clean": True,
+            "targets": ["build/task" + str(task_num)],
+            "actions": ["mkdir -p build/task" + str(task_num)]
+        }
