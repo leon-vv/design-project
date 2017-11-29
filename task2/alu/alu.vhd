@@ -13,11 +13,8 @@ end entity;
 
 architecture adder_arch of adder is
 begin
-	process(A, B, Cin) is
-	begin
-		S <= (A xor B) xor Cin;
-		Cout <= ((A xor B) and Cin) or (A and B);
-	end process;
+    S <= (A xor B) xor Cin;
+    Cout <= ((A xor B) and Cin) or (A and B);
 end architecture adder_arch;
 
 library IEEE;
