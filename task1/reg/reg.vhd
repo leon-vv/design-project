@@ -11,7 +11,7 @@ entity SRFF is
 	);
 end entity;
 
-architecture RTL of SRFF is
+architecture SRFF_arch of SRFF is
 begin
 	process(CLK, RST) is
 	begin
@@ -25,7 +25,7 @@ begin
 			end if;
 		end if;
 	end process;
-end architecture RTL;
+end architecture SRFF_arch;
 
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -40,7 +40,7 @@ entity reg is
 	);
 end entity;
 
-architecture GEN of reg is
+architecture reg_arch of reg is
 	component SRFF
 		port (
 		S : in std_logic;
@@ -60,6 +60,7 @@ begin
 			R_ff(I) <= (not D(I)) and CE;
 		end loop;
 	end process;
+
 	gen_reg: for I in 0 to 3 generate
 		sr: SRFF port map (
 			S_ff(I),
@@ -69,4 +70,5 @@ begin
 			Q(I)
 		);
 	end generate gen_reg;
-end architecture GEN;
+
+end architecture reg_arch;
