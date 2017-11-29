@@ -35,7 +35,7 @@ def task_wave_files():
             actions = [
                 "ghdl_mcode -a " + base_file,
                 "ghdl_mcode -a " + test_bench,
-                "ghdl_mcode -r " + vhdl_name + "_tb --vcd=" + target + " --stop-time=3000ns "]
+                "ghdl_mcode -r " + vhdl_name + "_tb --vcd=" + target + " --stop-time=10us "]
 
             yield {
                 "basename": vhdl_name,
