@@ -13,7 +13,7 @@ for subdir, dirs, files in os.walk(rootdir):
     for file in files:
         if file.endswith(".vhd"):
             if file.endswith("-tb.vhd"):
-                xise.write("<file xil_pn:name=\""+path+file+" xil_pn:type=\"FILE_VHDL\">\n")
+                xise.write("<file xil_pn:name=\""+path+file+"\" xil_pn:type=\"FILE_VHDL\">\n")
                 xise.write("<association xil_pn:name=\"BehavioralSimulation\"/>\n")
                 xise.write("<association xil_pn:name=\"PostMapSimulation\"/>\n")
                 xise.write("<association xil_pn:name=\"PostRouteSimulation\"/>\n")
