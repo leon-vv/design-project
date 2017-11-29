@@ -24,8 +24,7 @@ entity alu is
 	port (
 		A : in std_logic_vector(3 downto 0);
 		B : in std_logic_vector(3 downto 0);
-		S0 : in std_logic;
-		S1 : in std_logic;
+		S : in std_logic_vector(1 downto 0);
 		res : out std_logic_vector(3 downto 0);
 		CO : out std_logic
 	);
@@ -41,33 +40,39 @@ architecture alu_arch of alu is
 		Cout : out std_logic
 	);
 	end component;
+
 	signal shl : std_logic_vector(3 downto 0);
 	signal shr : std_logic_vector(3 downto 0);
 	signal add : std_logic_vector(3 downto 0);
-	signal carry : std_logic_vector(2 downto 0);
+	signal carry : std_logic_vector(3 downto 0);
 	signal comp : std_logic_vector(3 downto 0);
 begin
-	process(A, B, S0, S1) is
-	begin
-		for I in 0 to 3 loop
-			if I > 0 then
-				shl(I) <= A(I - 1);
-			else
-				shl(I) <= '0';
-			end if;
-			if I < 3 then
-				shr(I) <= A(I + 1);
-			else
-				shr(I) <= '0';
-			end if;
-			comp(I) <= not A(I);
-			res(I) <=
-				(add(I) and (S0 nor S1)) or
-				(shl(I) and (not S0 and S1)) or
-				(shr(I) and (S0 and not S1)) or
-				(comp(I) and (S0 and S1));
-		end loop;
-	end process;
+
+	gen_alu:
+	for I in 0 to 3 generate
+
+		gen_shiftl:
+		case I generate
+			when 1 to 3 => shl(I) <= A(I - 1);
+			when 0 => shl(0) <= '0';
+		end generate;
+
+		gen_shiftr:
+		case I generate
+			when 0 to 2 => shr(I) <= A(I + 1);
+			when 3 => shr(I) <= '0';
+		end generate;
+
+		comp(I) <= not A(I);
+
+		res(I) <=
+			(add(I) and (s(0) nor s(1))) or
+			(shl(I) and (not s(0) and s(1))) or
+			(shr(I) and (s(0) and not s(1))) or
+			(comp(I) and (s(0) and s(1)));
+
+	end generate gen_alu;
+
 	adder_0: adder port map (
 		A(0),
 		B(0),
@@ -75,7 +80,8 @@ begin
 		add(0),
 		carry(0)
 	);
-	gen_alu: for I in 1 to 3 generate
+
+	gen_adder: for I in 1 to 3 generate
 		adder_i: adder port map (
 			A(I),
 			B(I),
@@ -83,5 +89,8 @@ begin
 			add(I),
 			carry(I)
 		);
-	end generate gen_alu;
+	end generate gen_adder;
+
+    CO <= carry(3);
+
 end architecture alu_arch;

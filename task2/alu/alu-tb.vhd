@@ -11,8 +11,7 @@ architecture alu_tb_arch of alu_tb is
         port (
             A : in std_logic_vector(3 downto 0);
             B : in std_logic_vector(3 downto 0);
-            S0 : in std_logic;
-            S1 : in std_logic;
+            S : in std_logic_vector(1 downto 0);
             res : out std_logic_vector(3 downto 0);
             CO : out std_logic
         );
@@ -20,16 +19,14 @@ architecture alu_tb_arch of alu_tb is
 
     signal A : std_logic_vector(3 downto 0);
     signal B : std_logic_vector(3 downto 0);
-    signal S0 : std_logic;
-    signal S1 : std_logic;
+    signal S : std_logic_vector(1 downto 0);
     signal res : std_logic_vector(3 downto 0);
     signal CO : std_logic;
 
 begin
     
     -- ALU component
-    alu_comp : alu port map (
-        A, B, S0, S1, res, CO);
+    alu_comp : alu port map (A, B, S, res, CO);
 
     process begin
 
@@ -37,17 +34,13 @@ begin
             A <= std_logic_vector(to_unsigned(I, 4));
             B <= std_logic_vector(to_unsigned(I + 2, 4));
 
-            S0 <= '0';
-            S1 <= '0';
+            S <= "00";
             wait for 100 ns;
-            S0 <= '1';
-            S1 <= '0';
+            S <= "01";
             wait for 100 ns;
-            S0 <= '0';
-            S1 <= '1';
+            S <= "10";
             wait for 100 ns;
-            S0 <= '1';
-            S1 <= '1';
+            S <= "11";
             wait for 100 ns;
 
         end loop;
