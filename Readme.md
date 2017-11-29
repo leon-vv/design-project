@@ -2,7 +2,11 @@
 
 ### Structure
 
-Files in this repository are grouped by task number. The deliverables that correspond to the task numbers can be found in the [project schedule](http://liacs.leidenuniv.nl/~stefanovtp/courses/DITE/project/Design_Project_DITE.pdf).
+Files in this repository are grouped by task number. The deliverables that correspond to the task numbers can be found in the [project schedule](http://liacs.leidenuniv.nl/~stefanovtp/courses/DITE/project/Design_Project_DITE.pdf). Every major component has it's own testbench. These testbenches are standalone files with names ending on '-tb.vhd'.
+
+### ISE environment
+
+The repository contains a DITEProject.xise file. This file can be opened in the Xilinx ISE. To do this, simply use 'File -> Open Project' and select the supplied DITEProject.xise file.
 
 ### Simulating the components
 
