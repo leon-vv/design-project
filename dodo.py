@@ -1,36 +1,43 @@
 # Project structure
-files = [
-    {
+project = {
+    "shared": {
+        "SR-flip-flop": []
+    },
+    "task1": {
         # No dependencies beside mux1-2to1.vhd and test bench
         "mux1-2to1": [],
 
         # Depends on mux1-2to1 which is inside task 1
-        "mux4-2to1": [("mux1-2to1", 1)],
+        "mux4-2to1": [("mux1-2to1", "task1")],
         
-        "reg": []
+        "reg": [("SR-flip-flop", "shared")]
     },
-    {
+    "task2": {
         "alu": []        
     }
-]
+}
 
-def prefix_dir(name, suffix, task_num):
-    return "task" + str(task_num) + "/" + name + "/" + name + suffix
+def prefix_dir(dir_, name, suffix):
+    return dir_ + "/" + name + "/" + name + suffix
 
 def task_wave_files():
 
-    task_num = 0
+    for dir_, files in project.items():
 
-    for task in files:
-        task_num += 1
+        yield {
+            "basename": "_build_directory_" + dir_,
+            "clean": True,
+            "targets": ["build/" + dir_],
+            "actions": ["mkdir -p build/" + dir_]
+        }
 
-        for name, deps in task.items():
+        for name, deps in files.items():
             vhdl_name = name.replace("-", "_")
-            base_file = prefix_dir(name, ".vhd", task_num)
-            test_bench = prefix_dir(name, "-tb.vhd", task_num)
+            base_file = prefix_dir(dir_, name, ".vhd")
+            test_bench = prefix_dir(dir_, name, "-tb.vhd")
 
-            target = "build/task" + str(task_num) + "/" + name + ".vcd"
-            dependencies = [prefix_dir(dep[0], ".vhd", dep[1]) for dep in deps] + [base_file, test_bench]
+            target = "build/" + dir_ + "/" + name + ".vcd"
+            dependencies = [prefix_dir(dep[1], dep[0], ".vhd") for dep in deps] + [base_file, test_bench]
 
             actions = [
                 "ghdl_mcode -a " + base_file,
@@ -42,20 +49,9 @@ def task_wave_files():
                 "clean": True,
                 "targets": [target],
                 "file_dep": dependencies,
-                "setup": ["_build_directory" + str(task_num)],
+                "setup": ["_build_directory_" + dir_],
                 "actions": actions,
                 "title": lambda t: "Creating " + t.targets[0]
             }
 
-def task_build_directory():
-    task_num = 0
-
-    for task in files:
-        task_num += 1
-
-        yield {
-            "basename": "_build_directory" + str(task_num),
-            "clean": True,
-            "targets": ["build/task" + str(task_num)],
-            "actions": ["mkdir -p build/task" + str(task_num)]
-        }
+            

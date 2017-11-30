@@ -1,35 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity SRFF is
-	port (
-		S : in std_logic;
-		R : in std_logic;
-		CLK : in std_logic;
-		RST : in std_logic;
-		Q : out std_logic
-	);
-end entity;
-
-architecture SRFF_arch of SRFF is
-begin
-	process(CLK, RST) is
-	begin
-		if RST = '1' then
-			Q <= '0';
-		elsif rising_edge(CLK) then
-			if R = '1' then
-				Q <= '0';
-			elsif S = '1' then
-				Q <= '1';
-			end if;
-		end if;
-	end process;
-end architecture SRFF_arch;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-
 entity reg is
 	port (
 		D : in std_logic_vector(3 downto 0);
@@ -41,7 +12,7 @@ entity reg is
 end entity;
 
 architecture reg_arch of reg is
-	component SRFF
+	component SR_flip_flop
 		port (
 		S : in std_logic;
 		R : in std_logic;
@@ -50,6 +21,7 @@ architecture reg_arch of reg is
 		Q : out std_logic
 	);
 	end component;
+
 	signal S_ff : std_logic_vector(3 downto 0);
 	signal R_ff : std_logic_vector(3 downto 0);
 begin
@@ -61,7 +33,7 @@ begin
     end generate;
 
 	gen_reg: for I in 0 to 3 generate
-		sr: SRFF port map (
+		sr: SR_flip_flop port map (
 			S_ff(I),
 			R_ff(I),
 			C,
