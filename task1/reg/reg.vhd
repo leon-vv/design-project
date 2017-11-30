@@ -53,13 +53,12 @@ architecture reg_arch of reg is
 	signal S_ff : std_logic_vector(3 downto 0);
 	signal R_ff : std_logic_vector(3 downto 0);
 begin
-	process(D) is
-	begin
-		for I in 0 to 3 loop
-			S_ff(I) <= D(I) and CE;
-			R_ff(I) <= (not D(I)) and CE;
-		end loop;
-	end process;
+
+    gen_signal:
+    for I in 0 to 3 generate
+        S_ff(I) <= D(I) and CE;
+        R_ff(I) <= (not D(I)) and CE;
+    end generate;
 
 	gen_reg: for I in 0 to 3 generate
 		sr: SRFF port map (
