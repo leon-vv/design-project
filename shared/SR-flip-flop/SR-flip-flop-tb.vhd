@@ -10,6 +10,7 @@ architecture SR_flip_flop_tb_arch of SR_flip_flop_tb is
         port (
             S : in std_logic;
             R : in std_logic;
+            E : in std_logic;
             CLK : in std_logic;
             RST : in std_logic;
             Q : out std_logic
@@ -17,12 +18,12 @@ architecture SR_flip_flop_tb_arch of SR_flip_flop_tb is
     end component;
 
     signal CLK : std_logic := '1';
-    signal S, R, RST, Q: std_logic;
+    signal S, R, E, RST, Q: std_logic;
 begin
 
-    CLK <= not CLK after 25 ns;
+    CLK <= not CLK after 30 ns;
 
-    ff: SR_flip_flop port map(S, R, CLK, RST, Q);
+    ff: SR_flip_flop port map(S, R, E, CLK, RST, Q);
     process begin
 
         for I in std_logic range '0' to '1' loop
@@ -32,9 +33,13 @@ begin
             R <= J;
 
         for K in std_logic range '0' to '1' loop
-            RST <= K;
+            E <= K;
+
+        for L in std_logic range '0' to '1' loop
+            RST <= L;
 
             wait for 100 ns;
+        end loop;
         end loop;
         end loop;
         end loop;
