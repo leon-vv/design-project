@@ -13,7 +13,8 @@ project = {
         "reg": [("SR-flip-flop", "shared")]
     },
     "task2": {
-        "alu": []        
+        "alu": [],
+        "status-reg": [("SR-flip-flop", "shared")]
     }
 }
 
