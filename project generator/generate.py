@@ -3,7 +3,7 @@ rootdir = '../'
 
 begin = open("projectbegin.txt", "r")
 end = open("projectend.txt", "r")
-xise = open("../project.xise", "w")
+xise = open("../DITEProject.xise", "w")
 
 xise.write(begin.read())
 begin.close()
