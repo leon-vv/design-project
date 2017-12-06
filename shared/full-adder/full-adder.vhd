@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity adder is
+entity full_adder is
 	port (
 		A : in std_logic;
 		B : in std_logic;
@@ -11,8 +11,8 @@ entity adder is
 	);
 end entity;
 
-architecture adder_arch of adder is
+architecture full_adder_arch of full_adder is
 begin
     S <= (A xor B) xor Cin;
     Cout <= ((A xor B) and Cin) or (A and B);
-end architecture adder_arch;
+end architecture full_adder_arch;
