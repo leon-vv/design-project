@@ -1,25 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity adder is
-	port (
-		A : in std_logic;
-		B : in std_logic;
-		Cin : in std_logic;
-		S : out std_logic;
-		Cout : out std_logic
-	);
-end entity;
-
-architecture adder_arch of adder is
-begin
-    S <= (A xor B) xor Cin;
-    Cout <= ((A xor B) and Cin) or (A and B);
-end architecture adder_arch;
-
-library IEEE;
-use IEEE.std_logic_1164.all;
-
 entity alu is
 	port (
 		A : in std_logic_vector(3 downto 0);
@@ -43,7 +24,6 @@ architecture alu_arch of alu is
 
 	signal shl : std_logic_vector(3 downto 0);
 	signal shr : std_logic_vector(3 downto 0);
-	signal add : std_logic_vector(3 downto 0);
 	signal carry : std_logic_vector(3 downto 0);
 	signal comp : std_logic_vector(3 downto 0);
 begin
@@ -71,25 +51,5 @@ begin
 			(comp(I) and (s(0) and s(1)));
 
 	end generate gen_alu;
-
-	adder_0: adder port map (
-		A(0),
-		B(0),
-		'0',
-		add(0),
-		carry(0)
-	);
-
-	gen_adder: for I in 1 to 3 generate
-		adder_i: adder port map (
-			A(I),
-			B(I),
-			carry(I - 1),
-			add(I),
-			carry(I)
-		);
-	end generate gen_adder;
-
-    CO <= carry(3);
 
 end architecture alu_arch;
