@@ -1,16 +1,16 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 
-entity 4_adder is
+entity four_adder is
     port (
         A : in std_logic_vector(3 downto 0);
         B : in std_logic_vector(3 downto 0);
-        Cin : in std_logic_vector;
+        Cin : in std_logic;
         Y : out std_logic_vector(3 downto 0);
-        CO : out std_logic_vector);
+        CO : out std_logic);
 end entity;
 
-architecture 4_adder of 4_adder_arch is
+architecture four_adder_arch of four_adder is
     component adder
 		port (
 		A : in std_logic;
@@ -44,5 +44,5 @@ begin
 
     CO <= carry(3);
 
-end architecture 4_adder_arch;
+end architecture four_adder_arch;
 
