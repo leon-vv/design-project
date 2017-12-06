@@ -19,11 +19,20 @@ project = {
     "task2": {
         "alu": [("four-adder", "shared")],
         "status-reg": [("SR-flip-flop", "shared")]
+    },
+    "task3": {
+        "program-counter": [
+            ("four-adder", "shared"), 
+            ("SR-flip-flop", "shared"),
+            ("mux4-2to1", "task1")]
     }
 }
 
 def prefix_dir(dir_, name, suffix):
     return dir_ + "/" + name + "/" + name + suffix
+
+def to_vhdl_name(name):
+    return name.replace("-", "_")
 
 def task_wave_files():
 
@@ -37,13 +46,12 @@ def task_wave_files():
         }
 
         for name, deps in files.items():
-            vhdl_name = name.replace("-", "_")
+            vhdl_name = to_vhdl_name(name)
             base_file = prefix_dir(dir_, name, ".vhd")
             test_bench = prefix_dir(dir_, name, "-tb.vhd")
 
             target = "build/" + dir_ + "/" + name + ".vcd"
             dependencies = [prefix_dir(dep[1], dep[0], ".vhd") for dep in deps] + [base_file]
-
             actions = ["ghdl_mcode -a " + base_file]
 
             tb_exists = os.path.isfile(test_bench)
@@ -60,6 +68,7 @@ def task_wave_files():
                 "basename": vhdl_name,
                 "clean": True,
                 "targets": [target],
+                "task_dep": [to_vhdl_name(dep[0]) for dep in deps],
                 "file_dep": dependencies,
                 "setup": ["_build_directory_" + dir_],
                 "actions": actions,
