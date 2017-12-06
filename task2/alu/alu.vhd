@@ -48,19 +48,18 @@ architecture alu_arch of alu is
 	signal comp : std_logic_vector(3 downto 0);
 begin
 
+	shl(0) <= '0';
+	shr(3) <= '0';
+	
 	gen_alu:
 	for I in 0 to 3 generate
 
-		gen_shiftl:
-		case I generate
-			when 1 to 3 => shl(I) <= A(I - 1);
-			when 0 => shl(0) <= '0';
+		gen_shiftl: if I > 0 generate
+			shl(I) <= A(I - 1);
 		end generate;
 
-		gen_shiftr:
-		case I generate
-			when 0 to 2 => shr(I) <= A(I + 1);
-			when 3 => shr(I) <= '0';
+		gen_shiftr: if I < 3 generate
+			shr(I) <= A(I + 1);
 		end generate;
 
 		comp(I) <= not A(I);

@@ -16,6 +16,7 @@ architecture reg_arch of reg is
 		port (
 		S : in std_logic;
 		R : in std_logic;
+		E : in std_logic;
 		CLK : in std_logic;
 		RST : in std_logic;
 		Q : out std_logic
@@ -36,6 +37,7 @@ begin
 		sr: SR_flip_flop port map (
 			S_ff(I),
 			R_ff(I),
+			'1',
 			C,
 			R,
 			Q(I)
