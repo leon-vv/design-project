@@ -11,7 +11,7 @@ entity four_adder is
 end entity;
 
 architecture four_adder_arch of four_adder is
-    component adder
+    component full_adder
 		port (
 		A : in std_logic;
 		B : in std_logic;
@@ -20,24 +20,23 @@ architecture four_adder_arch of four_adder is
 		Cout : out std_logic);
 	end component;
 
-    signal add : std_logic_vector(3 downto 0); 
 	signal carry : std_logic_vector(3 downto 0);
 begin
 
-	adder_0: adder port map (
+	adder_0: full_adder port map (
 		A(0),
 		B(0),
-		'0',
-		add(0),
+		Cin,
+		Y(0),
 		carry(0)
 	);
 
 	gen_adder: for I in 1 to 3 generate
-		adder_i: adder port map (
+		adder_i: full_adder port map (
 			A(I),
 			B(I),
 			carry(I - 1),
-			add(I),
+			Y(I),
 			carry(I)
 		);
 	end generate gen_adder;
