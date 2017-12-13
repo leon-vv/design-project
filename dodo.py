@@ -24,7 +24,8 @@ project = {
         "program-counter": [
             ("four-adder", "shared"), 
             ("SR-flip-flop", "shared"),
-            ("mux4-2to1", "task1")]
+            ("mux4-2to1", "task1")],
+        "rom-16x7": []
     }
 }
 
