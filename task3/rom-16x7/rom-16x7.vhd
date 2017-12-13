@@ -41,16 +41,19 @@ architecture decoder_4to16_arch of decoder_4to16 is
 	signal L0 : std_logic_vector(1 downto 0);
 	signal L1 : std_logic_vector(3 downto 0);
 	signal L2 : std_logic_vector(7 downto 0);
-	--signal L3 : std_logic_vector(15 downto 0);
 begin
-	gen_L0: for I in 0 to 0 generate
-		dec: decoder_1to2 port map (
-			S(3),
-			'1',
-			L0(2*I),
-			L0(2*I+1)
-		);
-	end generate gen_L0;
+    -- Implement like a tree, with decoder at each level.
+    -- Highest level in the tree corresponds to L0, the second
+    -- level to L2, etc. The leafs correspond to the output O
+    -- of which one is enabled.
+
+    dec0: decoder_1to2 port map (
+        S(3),
+        '1',
+        L0(0),
+        L0(1)
+    );
+
 	gen_L1: for I in 0 to 1 generate
 		dec: decoder_1to2 port map (
 			S(2),
@@ -59,6 +62,7 @@ begin
 			L1(2*I+1)
 		);
 	end generate gen_L1;
+
 	gen_L2: for I in 0 to 3 generate
 		dec: decoder_1to2 port map (
 			S(1),
@@ -67,6 +71,7 @@ begin
 			L2(2*I+1)
 		);
 	end generate gen_L2;
+
 	gen_O: for I in 0 to 7 generate
 		dec: decoder_1to2 port map (
 			S(0),
@@ -75,6 +80,7 @@ begin
 			O(2*I+1)
 		);
 	end generate gen_O;
+
 end architecture decoder_4to16_arch;
 
 library IEEE;
@@ -119,22 +125,28 @@ architecture rom_16x7_arch of rom_16x7 is
 	signal decoder_out : std_logic_vector(15 downto 0);
 	signal or_in : std_logic_vector(111 downto 0);
 begin
+    -- Every line of the decoder output selects on 7 bit data block.
 	decoder: decoder_4to16 port map (
 		A,
 		decoder_out
 	);
-	gen_or: for I in 0 to 6 generate
+
+    -- The data is 'and' with the corresponding 'decoder_out' line.
+    -- Then all the data blocks are combined using 'or' gates.
+    -- Since 'or_in' is 0 everywhere except the data block selected the effect
+    -- is that 'D' will be equal to the selected block.
+    gen_blocks: for I in 0 to 15 generate
+        gen_and: for J in 0 to 6 generate
+				or_in(J * 16 + I) <= data(I * 7 + J) and decoder_out(I);
+        end generate;
+    end generate;
+
+    gen_or: for I in 0 to 6 generate
 		or16: or_16 port map (
 			or_in(I * 16 + 15 downto I * 16),
 			D(I)
 		);
 	end generate;
-	process(data, decoder_out) is
-	begin
-		for I in 0 to 15 loop
-			for J in 0 to 6 loop
-				or_in(J * 16 + I) <= data(I * 7 + J) and decoder_out(I);
-			end loop;
-		end loop;
-	end process;
+
+
 end architecture rom_16x7_arch;

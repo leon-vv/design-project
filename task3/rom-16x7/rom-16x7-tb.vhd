@@ -1,10 +1,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity rom_tb is
-end rom_tb;
+entity rom_16x7_tb is
+end rom_16x7_tb;
 
-architecture rom_tb_arch of rom_tb is
+architecture rom_16x7_tb_arch of rom_16x7_tb is
 
     component rom_16x7 is
         port (
@@ -74,4 +74,4 @@ begin
         wait for 100 ns;
     end process;
 
-end rom_tb_arch;
+end rom_16x7_tb_arch;
