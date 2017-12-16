@@ -24,7 +24,7 @@ The RST input is asynchronous and resets the state to zero (Q = 0).
 
 ### High level implementation
 
-Four SR Flip Flops are used to represent the Program Counter state. The new state is chosen using the Mux4_2to1 component. By supplying a '1' for the 'Carry-In' value and "0000" for the second number the Four Adder turns into a simple increment circuit. The inputs to this Mux consists of the current state incremented by one or the ROM data supplied at port D(3:0). The select line of the MUX is the output of an And gate whose inputs are the Carry and Load input ports.
+Four SR Flip Flops are used to represent the Program Counter state. The new state is chosen using the Mux4_2to1 component. By supplying a '1' for the 'Carry-In' value and "0000" for the second number the Four Adder turns into a simple increment circuit. The inputs to the Mux consist of the current state incremented by one and the ROM data supplied at port D(3:0). The select line of the MUX is the output of an And gate whose inputs are the Carry and Load input ports.
 
 
 ### Simulation
