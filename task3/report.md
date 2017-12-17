@@ -34,8 +34,15 @@ The main [Readme file](https://github.com/leon-vv/design-project) contains infor
 
 ## Read only memory (ROM)
 ### Design goal
-### Components used
-### High Level implementation
-### Simulation
+* Input ports: Data(111:0), A(3:0)
+* Output ports: D(6:0)
+The ROM is an asynchronous component which sets its output to a value stored at the address given as input. It effectively works as a Mux7_16to1, using the data as its inputs to select from and the given address as the selection bits.
 
-The ROM is implemented with a 4 to 16 decoder (which itself is implemented as a binary tree of 1 to 2 decoders with enable bits), a vector of bits to represent the data, and seven 16-input OR gates. The decoder is used to select the right memory cell, and uses the supplied address as its input. The data in each memory cell is AND'ed with the corresponding output bit from the decoder, the resulting bits (which can only be one for the selected cell) are then OR'ed together with the bits from the other cells to get each of the 7 bits of the output.
+### Components used
+The ROM is implemented with a 4 to 16 decoder (which itself is implemented as a binary tree of 1 to 2 decoders with enable bits), a vector of bits to represent the data, and seven 16-input OR gates.
+
+### High Level implementation
+The decoder is used to select the right memory cell, and uses the supplied address as its input. The data in each memory cell is AND'ed with the corresponding output bit from the decoder, the resulting bits (which can only be one for the selected cell) are then OR'ed together with the bits from the other cells to get each of the 7 bits of the output.
+
+### Simulation
+The main [Readme file](https://github.com/leon-vv/design-project) contains information on how to simulate these components. A [rom-16x7-tb.vhd](https://github.com/leon-vv/design-project/blob/master/task3/rom-16x7/rom-16x7-tb.vhd) file is included. This file contains code to set all the data in the rom and to then iterate through every address. The output can then be used to verify that the returned values match the stored values.
