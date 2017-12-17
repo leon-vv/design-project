@@ -36,6 +36,7 @@ The main [Readme file](https://github.com/leon-vv/design-project) contains infor
 ### Design goal
 * Input ports: Data(111:0), A(3:0)
 * Output ports: D(6:0)
+
 The ROM is an asynchronous component which sets its output to a value stored at the address given as input. It effectively works as a Mux7_16to1, using the data as its inputs to select from and the given address as the selection bits.
 
 ### Components used
