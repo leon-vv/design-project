@@ -22,7 +22,7 @@ The Instruction Decoder is a combination circuit that maps the value of the OPC 
 
 Since we know the meaning of each opcode we can deduce the following table:
 
-![Truth table for Instruction Decoder](https://raw.githubusercontent.com/leon-vv/design-project/master/truth-table.jpg)
+![Truth table for Instruction Decoder](https://raw.githubusercontent.com/leon-vv/design-project/master/task4/truth-table.jpg)
 
 ### Components used
 
