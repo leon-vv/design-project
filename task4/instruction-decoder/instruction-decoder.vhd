@@ -11,8 +11,8 @@ end entity;
 --- Instruction set:
 --- 0xx		ALU operation xx stored in register A
 --- 000		ADDAB
---- 001		SHLA
---- 010		SHRA
+--- 001		SHRA
+--- 010		SHLA
 --- 011		NOTA
 --- 100		LDA
 --- 101		LDB
@@ -29,7 +29,7 @@ architecture instruction_decoder_arch of instruction_decoder is
 	signal Status_CE : std_logic;
 begin
 	ALU_S <= OPC(1 downto 0);
-	Status_CE <= not OPC(2);
+	Status_CE <= not (OPC(0) or OPC(1) or OPC(2));
 	
 	REG_A_CE <= (not OPC(2)) or (OPC(0) nor OPC(1));
 	MUX_A_S <= OPC(2);
