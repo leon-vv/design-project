@@ -72,6 +72,16 @@
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
+<file xil_pn:name="task4/instruction-decoder/instruction-decoder.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="task4/instruction-decoder/instruction-decoder-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
 <file xil_pn:name="task1/mux4-2to1/mux4-2to1.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
