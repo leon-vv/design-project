@@ -26,6 +26,9 @@ project = {
             ("SR-flip-flop", "shared"),
             ("mux4-2to1", "task1")],
         "rom-16x7": []
+    },
+    "task4": {
+        "instruction-decoder": []
     }
 }
 
