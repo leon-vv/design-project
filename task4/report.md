@@ -33,7 +33,7 @@ No components have been used except the standard logic gates.
 Each bit in the Control output only depends on the three OPC bits. Therefore we can use Karnaugh maps to find an expression for every bit. This results in the expressions found in [instruction-decoder.vhd](https://github.com/leon-vv/design-project/blob/master/task4/instruction-decoder/instruction-decoder.vhd). 
 
 ### Simulation
-The main [Readme file](https://github.com/leon-vv/design-project) contains information on how to simulate these components. A [instruction-decoder-tb.vhd](https://github.com/leon-vv/design-project/blob/master/task4/instruction-decoder-tb.vhd) file is included. This file contains a loop which generates all the eight possible values for the OPC input. By inspecting the output signals we can determine if the values agree with the table in the picture above.
+The main [Readme file](https://github.com/leon-vv/design-project) contains information on how to simulate these components. A [instruction-decoder-tb.vhd](https://github.com/leon-vv/design-project/blob/master/task4/instruction-decoder/instruction-decoder-tb.vhd) file is included. This file contains a loop which generates all the eight possible values for the OPC input. By inspecting the output signals we can determine if the values agree with the table in the picture above.
 
 
 
