@@ -150,7 +150,9 @@ begin
         CLK,
         status_reg_q);
 
-end processor_arch;
+    register_a <= register_a_q;
+    register_b <= register_b_q;
 
+end processor_arch;
 
 
