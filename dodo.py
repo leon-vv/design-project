@@ -29,6 +29,16 @@ project = {
     },
     "task4": {
         "instruction-decoder": []
+    },
+    "task5": {
+        "processor": [
+            ("mux4-2to1", "task1"),
+            ("reg", "task1"),
+            ("alu", "task2"),
+            ("status-reg", "task2"),
+            ("program-counter", "task3"),
+            ("rom-16x7", "task3"),
+            ("instruction-decoder", "task4")]
     }
 }
 

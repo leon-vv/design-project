@@ -14,7 +14,11 @@
 
   <version xil_pn:ise_version="14.7" xil_pn:schema_version="2"/>
 
-  <files><file xil_pn:name="shared/full-adder/full-adder.vhd" xil_pn:type="FILE_VHDL">
+  <files><file xil_pn:name="shared/four-adder/four-adder.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="shared/full-adder/full-adder.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
@@ -28,7 +32,53 @@
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
-<file xil_pn:name="shared/four-adder/four-adder.vhd" xil_pn:type="FILE_VHDL">
+<file xil_pn:name="task1/mux1-2to1/mux1-2to1-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
+<file xil_pn:name="task1/mux1-2to1/mux1-2to1.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="task1/mux4-2to1/mux4-2to1-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
+<file xil_pn:name="task1/mux4-2to1/mux4-2to1.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="task1/reg/reg-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
+<file xil_pn:name="task1/reg/reg.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="task2/alu/alu-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
+<file xil_pn:name="task2/alu/alu.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="Implementation"/>
+</file>
+<file xil_pn:name="task2/status-reg/status-reg-tb.vhd" xil_pn:type="FILE_VHDL">
+<association xil_pn:name="BehavioralSimulation"/>
+<association xil_pn:name="PostMapSimulation"/>
+<association xil_pn:name="PostRouteSimulation"/>
+<association xil_pn:name="PostTranslateSimulation"/>
+</file>
+<file xil_pn:name="task2/status-reg/status-reg.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
@@ -42,37 +92,13 @@
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
-<file xil_pn:name="task3/rom-16x7/rom-16x7.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="Implementation"/>
-</file>
 <file xil_pn:name="task3/rom-16x7/rom-16x7-tb.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="PostMapSimulation"/>
 <association xil_pn:name="PostRouteSimulation"/>
 <association xil_pn:name="PostTranslateSimulation"/>
 </file>
-<file xil_pn:name="task2/alu/alu.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="Implementation"/>
-</file>
-<file xil_pn:name="task2/alu/alu-tb.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="PostMapSimulation"/>
-<association xil_pn:name="PostRouteSimulation"/>
-<association xil_pn:name="PostTranslateSimulation"/>
-</file>
-<file xil_pn:name="task2/status-reg/status-reg-tb.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="PostMapSimulation"/>
-<association xil_pn:name="PostRouteSimulation"/>
-<association xil_pn:name="PostTranslateSimulation"/>
-</file>
-<file xil_pn:name="task2/status-reg/status-reg.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="Implementation"/>
-</file>
-<file xil_pn:name="task4/instruction-decoder/instruction-decoder.vhd" xil_pn:type="FILE_VHDL">
+<file xil_pn:name="task3/rom-16x7/rom-16x7.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
@@ -82,33 +108,17 @@
 <association xil_pn:name="PostRouteSimulation"/>
 <association xil_pn:name="PostTranslateSimulation"/>
 </file>
-<file xil_pn:name="task1/mux4-2to1/mux4-2to1.vhd" xil_pn:type="FILE_VHDL">
+<file xil_pn:name="task4/instruction-decoder/instruction-decoder.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
-<file xil_pn:name="task1/mux4-2to1/mux4-2to1-tb.vhd" xil_pn:type="FILE_VHDL">
+<file xil_pn:name="task5/processor/processor-tb.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="PostMapSimulation"/>
 <association xil_pn:name="PostRouteSimulation"/>
 <association xil_pn:name="PostTranslateSimulation"/>
 </file>
-<file xil_pn:name="task1/reg/reg.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="Implementation"/>
-</file>
-<file xil_pn:name="task1/reg/reg-tb.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="PostMapSimulation"/>
-<association xil_pn:name="PostRouteSimulation"/>
-<association xil_pn:name="PostTranslateSimulation"/>
-</file>
-<file xil_pn:name="task1/mux1-2to1/mux1-2to1-tb.vhd" xil_pn:type="FILE_VHDL">
-<association xil_pn:name="BehavioralSimulation"/>
-<association xil_pn:name="PostMapSimulation"/>
-<association xil_pn:name="PostRouteSimulation"/>
-<association xil_pn:name="PostTranslateSimulation"/>
-</file>
-<file xil_pn:name="task1/mux1-2to1/mux1-2to1.vhd" xil_pn:type="FILE_VHDL">
+<file xil_pn:name="task5/processor/processor.vhd" xil_pn:type="FILE_VHDL">
 <association xil_pn:name="BehavioralSimulation"/>
 <association xil_pn:name="Implementation"/>
 </file>
